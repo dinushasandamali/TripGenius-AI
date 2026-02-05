@@ -1,8 +1,3 @@
-"""
-Travel Planning Agentic System - FastAPI Ready Version
-Uses .env for Gemini API key
-"""
-
 import os
 import json
 import operator
@@ -39,7 +34,6 @@ def call_gemini(prompt: str) -> str:
 # DESTINATION DATABASE
 # =============================================================================
 
-# Local fallback data kept for resilience and testing
 DESTINATIONS_DB = {
     "paris": {
         "attractions": [
@@ -77,7 +71,6 @@ DESTINATIONS_DB = {
         "avg_meal_cost": 25,
         "avg_transport_day": 15,
     },
-    # Sri Lanka (country-level, budget friendly)
     "sri lanka": {
         "attractions": [
             {"name": "Sigiriya Rock Fortress", "cost": 35, "duration": 3, "category": "landmark", "description": "Ancient rock fortress and UNESCO World Heritage site"},
@@ -148,19 +141,6 @@ DESTINATIONS_DB = {
 # =============================================================================
 
 class ExternalDestinationAPI:
-    """Lightweight client to pull destination data from an external API.
-
-    Expected response shape (can be adapted as needed):
-    {
-      "destination": "paris",
-      "avg_meal_cost": 30,
-      "avg_transport_day": 15,
-      "attractions": [
-        {"name": "...", "cost": 10, "duration": 2, "category": "museum", "description": "..."},
-        ...
-      ]
-    }
-    """
 
     @staticmethod
     def fetch_destination(destination: str) -> Optional[Dict[str, Any]]:
@@ -356,7 +336,7 @@ def build_travel_agent_graph():
     return graph.compile()
 
 # =============================================================================
-# API ENTRY FUNCTION (USED BY FASTAPI)
+# API ENTRY FUNCTION 
 # =============================================================================
 
 def create_travel_plan(destination, budget, num_days, interests, travel_style="mid-range"):
